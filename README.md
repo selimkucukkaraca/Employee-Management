@@ -4,7 +4,7 @@ This project is for the company and its employees; it offers adding, deleting, l
 
 
 ## Tech Stack
-Java17, Spring Boot, MySQL, Lombok
+Java17, Spring Boot, MySQL, Lombok, Validation
 
 ## API Use Of
 
@@ -41,17 +41,40 @@ Java17, Spring Boot, MySQL, Lombok
 #### Get All Company
 
 ```http
-  GET http://localhost:8080/api/v1/company/get-all-company
+  GET http://localhost:8080/api/v1/company
 ```
 
 | Parameter | Type  | Description  |
 | :-------- |:------|:-------------|
-| `page`    | `int` | Page Number. |
 | `size`    | `int` | Data Number. |
+| `page`    | `int` | Size Number. |
 
 ```
 KEY = size
 KEY = page
+```
+
+#### Update Company
+
+While the company is updating;
+First of all, write down the 'companyId' of the company.
+Secondly, update the name of the company.
+
+```http
+  PUT  http://localhost:8080/api/v1/company
+```
+
+|  Parameter   | Type     | Description     |
+|:-------------|:---------|:----------------|
+| `companyId`  | `string` | Company Id      |
+| `companyName`| `string` | Company Name    |
+
+
+```
+{
+    "companyId" : "",
+    "companyName" : ""
+}
 ```
 
 #### Save Employee
@@ -64,13 +87,13 @@ KEY = page
 |:------------------|:---------|:--------------------|
 | `employeeName`    | `string` | Employee name.      |
 | `employeeLastName`| `string` | Employee last name. |
-| `company`         | `company`| Company name.       |
+| `companyId`       | `string` | Company Id.       |
 
 ```
 {
     "employeeName" : "",
     "employeeLastName" : "",
-    "company" : ""
+    "companyId" : ""
 }
 ```
 
@@ -93,16 +116,41 @@ KEY = employeeId
 #### Get All Employee
 
 ```http
-  GET http://localhost:8080/api/v1/employee/get-all-employee
+  GET http://localhost:8080/api/v1/employee
 ```
 
 | Parameter | Type  | Description  |
 | :-------- |:------|:-------------|
-| `page` | `int`    | Page Number. |
 | `size` | `int`    | Data Number. |
+| `page` | `int`    | Page Number. |
 
 ```
 KEY = size
 KEY = page
+```
+
+#### Update Employee
+
+while the employee is updating;
+First of all, type in the employee's 'employeeID'.
+Secondly, update the employee's first and last name.
+
+```http
+  PUT  http://localhost:8080/api/v1/employee
+```
+
+|  Parameter        | Type     | Description       |
+|:------------------|:---------|:------------------|
+| `employeeName`    | `string` | Employee Name     |
+| `employeeLastName`| `string` | Employee Last name|
+| `employeeId`      | `string` | Employee Id       |
+
+
+```
+{
+    "employeeName" : "",
+    "employeeLastName" : "",
+    "employeeId" : ""
+}
 ```
 
