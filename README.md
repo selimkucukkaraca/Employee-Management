@@ -10,7 +10,7 @@ Java17, Spring Boot, MySQL, Lombok
 
 #### Save Company
 
-```
+```http
   POST  http://localhost:8080/api/v1/company
 ```
 
@@ -26,7 +26,7 @@ Java17, Spring Boot, MySQL, Lombok
 
 #### Delete Company
 
-```
+```http
   DELETE  http://localhost:8080/api/v1/company?companyId=
 ```
 
@@ -40,7 +40,7 @@ Java17, Spring Boot, MySQL, Lombok
 
 #### Get All Company
 
-```
+```http
   GET http://localhost:8080/api/v1/company/get-all-company
 ```
 
