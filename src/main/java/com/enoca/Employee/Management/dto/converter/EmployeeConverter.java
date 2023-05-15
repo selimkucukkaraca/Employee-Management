@@ -2,7 +2,6 @@ package com.enoca.Employee.Management.dto.converter;
 
 import com.enoca.Employee.Management.dto.EmployeeDto;
 import com.enoca.Employee.Management.dto.request.CreateEmployeeRequest;
-import com.enoca.Employee.Management.model.Company;
 import com.enoca.Employee.Management.model.Employee;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,11 +21,10 @@ public class EmployeeConverter {
         );
     }
 
-    public Employee toEntity(CreateEmployeeRequest request, Company company){
+    public Employee toEntity(CreateEmployeeRequest request){
         return new Employee(
-                request.getEmployeeName(),
-                request.getEmployeeLastName(),
-                company
+                request.employeeName(),
+                request.employeeLastName()
         );
     }
 

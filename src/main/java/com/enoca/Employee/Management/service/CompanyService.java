@@ -3,6 +3,8 @@ package com.enoca.Employee.Management.service;
 import com.enoca.Employee.Management.dto.CompanyDto;
 import com.enoca.Employee.Management.dto.converter.CompanyConverter;
 import com.enoca.Employee.Management.dto.request.CreateCompanyRequest;
+import com.enoca.Employee.Management.dto.request.UpdateCompanyRequest;
+import com.enoca.Employee.Management.exception.NotFoundException;
 import com.enoca.Employee.Management.model.Company;
 import com.enoca.Employee.Management.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,11 +43,14 @@ public class CompanyService {
 
     protected Company getCompanyByCompanyId(String companyId){
         return companyRepository.findCompanyByCompanyId(companyId)
-                .orElseThrow();
+                .orElseThrow(() -> new NotFoundException("Company Id not found: " + companyId));
+
     }
 
-    protected void updateCompany(Company company){
-        companyRepository.save(company);
+    public CompanyDto update(UpdateCompanyRequest request){
+        var fromDb = getCompanyByCompanyId(request.companyId());
+        fromDb.setCompanyName(request.companyName());
+        companyRepository.save(fromDb);
+        return companyConverter.convertToDto(fromDb);
     }
-
 }

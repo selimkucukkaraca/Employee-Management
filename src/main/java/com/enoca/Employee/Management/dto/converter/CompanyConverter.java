@@ -16,7 +16,7 @@ public class CompanyConverter {
     }
 
     public Company toEntity(CreateCompanyRequest request){
-        return new Company(request.getCompanyName());
+        return new Company(request.companyName());
     }
 
 }

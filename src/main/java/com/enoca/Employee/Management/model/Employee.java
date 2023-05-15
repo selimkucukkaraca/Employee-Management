@@ -22,9 +22,8 @@ public class Employee extends BaseEntity{
     @ManyToOne(cascade = CascadeType.ALL)
     private Company company;
 
-    public Employee(String employeeName, String employeeLastName, Company company) {
+    public Employee(String employeeName, String employeeLastName) {
         this.employeeName = employeeName;
         this.employeeLastName = employeeLastName;
-        this.company = company;
     }
 }

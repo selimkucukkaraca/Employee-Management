@@ -3,6 +3,8 @@ package com.enoca.Employee.Management.service;
 import com.enoca.Employee.Management.dto.EmployeeDto;
 import com.enoca.Employee.Management.dto.converter.EmployeeConverter;
 import com.enoca.Employee.Management.dto.request.CreateEmployeeRequest;
+import com.enoca.Employee.Management.dto.request.UpdateEmployeeRequest;
+import com.enoca.Employee.Management.exception.NotFoundException;
 import com.enoca.Employee.Management.model.Company;
 import com.enoca.Employee.Management.model.Employee;
 import com.enoca.Employee.Management.repository.EmployeeRepository;
@@ -19,9 +21,12 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeConverter employeeConverter;
+    private final CompanyService companyService;
 
-    public EmployeeDto createEmployee(CreateEmployeeRequest request, Company company){
-        var saved = employeeConverter.toEntity(request,company);
+    public EmployeeDto createEmployee(CreateEmployeeRequest request){
+        Company company = companyService.getCompanyByCompanyId(request.companyId());
+        var saved = employeeConverter.toEntity(request);
+        saved.setCompany(company);
         employeeRepository.save(saved);
         return employeeConverter.convertToDto(saved);
     }
@@ -41,11 +46,14 @@ public class EmployeeService {
 
     protected Employee getEmployeeByEmployeeId(String employeeId){
         return employeeRepository.findEmployeeByEmployeeId(employeeId)
-                .orElseThrow();
+                .orElseThrow(() -> new NotFoundException("Employee Id not found: " + employeeId));
     }
 
-    protected void updateEmployee(Employee employee){
-        employeeRepository.save(employee);
+    public EmployeeDto update(UpdateEmployeeRequest request){
+        var fromDb = getEmployeeByEmployeeId(request.employeeId());
+        fromDb.setEmployeeName(request.employeeName());
+        fromDb.setEmployeeLastName(request.employeeLastName());
+        employeeRepository.save(fromDb);
+        return employeeConverter.convertToDto(fromDb);
     }
-
 }

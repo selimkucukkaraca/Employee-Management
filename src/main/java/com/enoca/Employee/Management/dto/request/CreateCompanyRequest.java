@@ -1,8 +1,10 @@
 package com.enoca.Employee.Management.dto.request;
 
-import lombok.Data;
+import jakarta.validation.constraints.NotBlank;
 
-@Data
-public class CreateCompanyRequest {
-    private String companyName;
+
+public record CreateCompanyRequest(
+    @NotBlank
+    String companyName
+){
 }
