@@ -3,11 +3,11 @@ package com.enoca.Employee.Management.dto.converter;
 import com.enoca.Employee.Management.dto.EmployeeDto;
 import com.enoca.Employee.Management.dto.request.CreateEmployeeRequest;
 import com.enoca.Employee.Management.model.Employee;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EmployeeConverter {
 
     private final CompanyConverter companyConverter;
